@@ -17,12 +17,12 @@ services:
   #       timeout: 10s
   #       retries: 30
 
-  jenkins:
+  jenkins_controller:
     # depends_on:
     #   artifactory:
     #     condition: service_healthy
     build: jenkins_controller
-    container_name: jenkins
+    container_name: jenkins_controller
     hostname: jenkins_controller
     ports:
       - "50000:50000"

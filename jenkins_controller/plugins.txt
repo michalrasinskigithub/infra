@@ -49,6 +49,7 @@ mina-sshd-api-core:2.9.1-44.v476733c11f82
 momentjs:1.1.1
 okhttp-api:4.9.3-108.v0feda04578cf
 pam-auth:1.10
+permissive-script-security:0.3
 pipeline-build-step:2.18
 pipeline-github-lib:38.v445716ea_edda_
 pipeline-graph-analysis:195.v5812d95a_a_2f9
