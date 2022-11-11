@@ -1,0 +1,83 @@
+version: '2.4'
+
+services:
+  # artifactory:
+  #   image: docker.bintray.io/jfrog/artifactory-jcr:latest
+  #   container_name: artifactory
+  #   ports:
+  #     - "8081:8081"
+  #     - "8082:8082"
+  #   volumes:
+  #     - ./artifactory/:/artifactory_extra_conf/
+  #   restart: always
+  #   healthcheck:
+  #       test: ["CMD", "curl", "-f", "http://localhost:8082/artifactory/api/system/ping"]
+  #       start_period: 30s
+  #       interval: 5s
+  #       timeout: 10s
+  #       retries: 30
+
+  jenkins:
+    # depends_on:
+    #   artifactory:
+    #     condition: service_healthy
+    build: jenkins_controller
+    container_name: jenkins
+    hostname: jenkins_controller
+    ports:
+      - "50000:50000"
+      - "8080:8080"
+    volumes:
+      - ./jenkins_controller/casc.yml:/usr/share/jenkins/ref/casc.yml #plik Coniguration as Code
+      - ./jenkins_controller/jobs:/usr/share/jenkins/ref/jobs         #
+      - ./jenkins_controller/data:/var/jenkins_home                   #
+    environment:
+      - JENKINS_ADMIN_ID=admin                           #nazwa konta admina
+      - JENKINS_ADMIN_PASSWORD=admin                     #haslo konta admina
+      - JENKINS_LOCATION_URL=http://192.168.0.200:8080/  #link do jenkinsa
+    restart: always
+
+
+  # jenkins_agent:
+  #   depends_on:
+  #     - jenkins
+  #   container_name: jenkins_agent
+  #   build: jenkins_agent
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   expose:
+  #     - 22
+  #   environment:
+  #     - JENKINS_AGENT_SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDlBScoyPr9ehJ3008Cxl1rYzXWiT6zgk19W4sfTmwcEAUtkQmbrMVms7YcDCfDAb2gkHvT+EcThGSFFb0zxwodNRIrHBklpCgbKbI3m1n8FHqplrBeF9vL46BNFguHXVZpt3zmBrcnUlWf9eijUcOQRi0R8lHOWr17WAAyQRlQZq9a2Thix5W2hSU5/3jA7SPJm83b+miGPm16MJjdAznTLYe+vq52YC4HJ/q7S2ABBZctb5O7PTsGCIFtU6Ymr94rc596qgIVuRdSMRgi80xThtqfa54/JbOIVP+hGcTk06Tnc1X1jRuWtty/ZDNosoIkzCOkTsioI6IW6R40IIZ3 michal@one
+  #   restart: always
+
+  # sonarqube:
+  #   depends_on:
+  #     - jenkins
+  #   image: sonarqube:9.2.4-community
+  #   container_name: sonarqube
+  #   ports:
+  #     - "9000:9000"
+  #   restart: always
+
+  # selenium_hub:
+  #   depends_on:
+  #     - jenkins
+  #   image: selenium/hub
+  #   container_name: selenium_hub
+  #   ports:
+  #   - "4442:4442"
+  #   - "4443:4443"
+  #   - "4444:4444"
+  #   restart: always
+
+  # firefox:
+  #   image: selenium/node-firefox
+  #   container_name: firefox
+  #   depends_on:
+  #     - selenium_hub
+  #   environment:
+  #   - SE_EVENT_BUS_HOST=selenium_hub
+  #   - SE_EVENT_BUS_PUBLISH_PORT=4442
+  #   - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+  #   restart: always
