@@ -27,6 +27,8 @@ services:
     ports:
       - "50000:50000"
       - "8080:8080"
+    networks:
+      - jenkins
     volumes:
       - ./jenkins_controller/casc.yml:/usr/share/jenkins/ref/casc.yml #plik Coniguration as Code
       - ./jenkins_controller/jobs:/usr/share/jenkins/ref/jobs         #
@@ -81,3 +83,6 @@ services:
   #   - SE_EVENT_BUS_PUBLISH_PORT=4442
   #   - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
   #   restart: always
+networks:
+  jenkins:
+    name: jenkins
