@@ -1,2 +1,3 @@
 /jenkins_controller/data/**
 !/jenkins_controller/data/.gitkeep
+!/jenkins_controller/jobs/.gitkeep
