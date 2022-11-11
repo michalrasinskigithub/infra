@@ -1,1 +1,2 @@
 /jenkins_controller/data/**
+!/jenkins_controller/data/.gitkeep
