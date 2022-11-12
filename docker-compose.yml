@@ -42,7 +42,7 @@ services:
 
   jenkins_agent:
     depends_on:
-      - jenkins
+      - jenkins_controller
     container_name: jenkins_agent
     build: jenkins_agent
     volumes:
