@@ -45,6 +45,8 @@ services:
       - jenkins_controller
     container_name: jenkins_agent
     build: jenkins_agent
+    networks:
+      - jenkins
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     expose:
