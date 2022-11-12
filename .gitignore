@@ -1,3 +1,4 @@
 /jenkins_controller/data/**
+id_rsa**
 !/jenkins_controller/data/.gitkeep
 !/jenkins_controller/jobs/.gitkeep

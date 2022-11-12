@@ -40,18 +40,18 @@ services:
     restart: always
 
 
-  # jenkins_agent:
-  #   depends_on:
-  #     - jenkins
-  #   container_name: jenkins_agent
-  #   build: jenkins_agent
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #   expose:
-  #     - 22
-  #   environment:
-  #     - JENKINS_AGENT_SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDlBScoyPr9ehJ3008Cxl1rYzXWiT6zgk19W4sfTmwcEAUtkQmbrMVms7YcDCfDAb2gkHvT+EcThGSFFb0zxwodNRIrHBklpCgbKbI3m1n8FHqplrBeF9vL46BNFguHXVZpt3zmBrcnUlWf9eijUcOQRi0R8lHOWr17WAAyQRlQZq9a2Thix5W2hSU5/3jA7SPJm83b+miGPm16MJjdAznTLYe+vq52YC4HJ/q7S2ABBZctb5O7PTsGCIFtU6Ymr94rc596qgIVuRdSMRgi80xThtqfa54/JbOIVP+hGcTk06Tnc1X1jRuWtty/ZDNosoIkzCOkTsioI6IW6R40IIZ3 michal@one
-  #   restart: always
+  jenkins_agent:
+    depends_on:
+      - jenkins
+    container_name: jenkins_agent
+    build: jenkins_agent
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    expose:
+      - 22
+    environment:
+      - JENKINS_AGENT_SSH_PUBKEY=
+    restart: always
 
   # sonarqube:
   #   depends_on:
