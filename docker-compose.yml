@@ -45,6 +45,7 @@ services:
       - jenkins_controller
     container_name: jenkins_agent
     build: jenkins_agent
+    hostname: jenkins_agent
     networks:
       - jenkins
     volumes:
